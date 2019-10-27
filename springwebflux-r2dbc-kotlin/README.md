@@ -3,16 +3,39 @@
 ## ProjectStacks
 
  - Spring Framework + Spring Boot
- - R2DBC
- - Postgres
+ - Reactive MongoDB
+ - MongoDB
  - JUnit
+ 
  
  
 ## Run Postgres Locally
 
 ```shell script
-docker pull postgres
-docker volume pgdata
-docker run -d -p 5432:5432 --name pgsql -it --rm -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=password postgres
+docker pull mongo
+docker run --name mongodb_server -v ${local_db_path}/db:/data/db -d -p 27017:27017 mongo --auth
+docker exec -it mongodb_server bash
 ```
 
+## admin account
+```shell script
+use admin
+
+db.createUser({
+    user: 'admin',
+    pwd: 'admin',
+    roles: [ { role: 'userAdminAnyDatabase', db: 'admin' } ]
+})
+```
+
+## custom database
+```shell script
+mongo -u 'admin' -p 'admin' –authenticationDatabase 'admin'
+
+use realworld
+db.createUser({
+  user: 'realworld_user',
+  pwd: 'password',
+  roles: ['dbAdmin', 'readWrite'] 
+})
+```
