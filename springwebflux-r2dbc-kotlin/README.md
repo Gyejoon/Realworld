@@ -9,6 +9,9 @@
  
  
  
+## Project Spec
+[Backend Api Spec](https://github.com/gothinkster/realworld/tree/master/api) 
+ 
 ## Run Postgres Locally
 
 ```shell script
