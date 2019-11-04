@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TagList from './TagList';
+import Banner from './Banner';
 
 const Home = () => {
   return (
     <div className="home-page">
-      <div className="banner">
-        <div className="container">
-          <h1 className="logo-font">conduit</h1>
-          <p>A place to share your knowledge.</p>
-        </div>
-      </div>
-
+      <Banner />
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
@@ -76,39 +72,7 @@ const Home = () => {
               </Link>
             </div>
           </div>
-
-          <div className="col-md-3">
-            <div className="sidebar">
-              <p>Popular Tags</p>
-
-              <div className="tag-list">
-                <Link to="" className="tag-pill tag-default">
-                  programming
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  javascript
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  emberjs
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  angularjs
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  react
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  mean
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  node
-                </Link>
-                <Link to="" className="tag-pill tag-default">
-                  rails
-                </Link>
-              </div>
-            </div>
-          </div>
+          <TagList />
         </div>
       </div>
     </div>
