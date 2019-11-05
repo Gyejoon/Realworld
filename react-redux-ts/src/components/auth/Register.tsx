@@ -1,22 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Auth = () => {
   return (
     <div className="auth-page">
       <div className="container page">
         <div className="row">
           <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Sign in</h1>
+            <h1 className="text-xs-center">Sign up</h1>
             <p className="text-xs-center">
-              <Link to="register">Need an account? </Link>
+              <Link to="login">Have an account? </Link>
             </p>
 
             <ul className="error-messages">
-              <li>이메일 혹은 패스워드가 틀립니다.</li>
+              <li>That email is already taken</li>
             </ul>
 
             <form>
+              <fieldset className="form-group">
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  placeholder="Your Name"
+                />
+              </fieldset>
               <fieldset className="form-group">
                 <input
                   className="form-control form-control-lg"
@@ -32,7 +39,7 @@ const Login = () => {
                 />
               </fieldset>
               <button className="btn btn-lg btn-primary pull-xs-right">
-                Sign in
+                Sign up
               </button>
             </form>
           </div>
@@ -42,4 +49,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;
