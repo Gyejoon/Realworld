@@ -23,7 +23,7 @@
     "tslint": "^5.19.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
-    "typesafe-actions": "^5.1.0-1",
+    "typesafe-actions": "^4.4.2",
     "typescript": "3.6.2"
   },
   "scripts": {
