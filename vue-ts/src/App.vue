@@ -1,38 +1,21 @@
 <template>
   <div id="app">
-    <Header />
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <TheHeader />
     <router-view />
+    <TheFooter />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Header from '@/components/Header.vue';
+import { Component, Vue } from 'vue-property-decorator';
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 @Component({
   components: {
-    Header
+    TheHeader,
+    TheFooter
   }
 })
-export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
-}
+export default class App extends Vue {}
 </script>
-
-<style lang="scss">
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-</style>
