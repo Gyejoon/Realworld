@@ -30,10 +30,7 @@ export type UpdateRequest = {
 };
 
 export default {
-  current: async () => {
-    const response = await apiClient.get<AuthResponse>('/user');
-    return response.data;
-  },
+  current: async () => apiClient.get<AuthResponse>('/user'),
   login: async (request: LoginRequest) => {
     return apiClient.post<AuthResponse>('/users/login', {
       user: {

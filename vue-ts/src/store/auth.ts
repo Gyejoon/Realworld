@@ -1,6 +1,7 @@
 import jwt from '@/lib/jwt';
 import { authService } from '@/services';
 import { User, LoginRequest } from '@/services/auth';
+import { setHeader } from '@/services/apiClient';
 
 export type AuthState = {
   errors: any;
@@ -40,6 +41,20 @@ const actions = {
   },
   logout({ commit }: any) {
     commit('purgeAuth');
+  },
+  async checkAuth({ commit }: any) {
+    const token = jwt.getToken();
+    if (token) {
+      setHeader(token);
+      try {
+        const response = await authService.current();
+        commit('setAuth', response.data.user);
+      } catch (e) {
+        commit('setError', e.data.errors);
+      }
+    } else {
+      commit('purgeAuth');
+    }
   }
 };
 
