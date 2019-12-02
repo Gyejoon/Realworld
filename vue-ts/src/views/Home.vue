@@ -4,7 +4,7 @@
 
     <div class="container page">
       <div class="row">
-        <HomeArticlePreview />
+        <HomeGlobalFeed />
         <HomePopularTagList />
       </div>
     </div>
@@ -14,13 +14,13 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import TheBanner from '@/components/TheBanner.vue';
-import HomeArticlePreview from '@/views/home/HomeArticlePreview.vue';
+import HomeGlobalFeed from '@/views/home/HomeGlobalFeed.vue';
 import HomePopularTagList from '@/views/home/HomePopularTagList.vue';
 
 @Component({
   components: {
     TheBanner,
-    HomeArticlePreview,
+    HomeGlobalFeed,
     HomePopularTagList
   }
 })
