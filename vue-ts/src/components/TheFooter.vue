@@ -3,7 +3,7 @@
     <div class="container">
       <router-link to="/" class="logo-font">conduit</router-link>
       <span class="attribution">
-        Vue + Typescript + Vuex + Vue Router
+        Vue + Typescript + Vuex + Vue Router author Gyejoong.
       </span>
     </div>
   </footer>
