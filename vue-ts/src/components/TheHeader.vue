@@ -31,7 +31,7 @@
               params: { username: currentUser.username }
             }"
           >
-            <img :src="currentUser.image" class="user-pic" :alt="currentUser.username" />
+            <img :src="currentUser.image" class="user-pic" />
             {{ currentUser.username }}
           </router-link>
         </li>
