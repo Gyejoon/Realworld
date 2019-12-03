@@ -7,7 +7,7 @@
           <router-link class="nav-link" exact active-class="active" to="/">메인</router-link>
         </li>
         <li class="nav-item" v-if="isAuthenticated">
-          <router-link class="nav-link" active-class="active" to="/aritcle">
+          <router-link class="nav-link" active-class="active" to="/editor">
             <i class="ion-compose"></i>&nbsp;새 글 작성
           </router-link>
         </li>
