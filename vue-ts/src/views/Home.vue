@@ -5,7 +5,7 @@
     <div class="container page">
       <div class="row">
         <HomeGlobalFeed />
-        <HomePopularTagList />
+        <PopularTagList />
       </div>
     </div>
   </div>
@@ -15,13 +15,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import TheBanner from '@/components/TheBanner.vue';
 import HomeGlobalFeed from '@/views/home/HomeGlobalFeed.vue';
-import HomePopularTagList from '@/views/home/HomePopularTagList.vue';
+import PopularTagList from '@/components/PopularTagList.vue';
 
 @Component({
   components: {
     TheBanner,
     HomeGlobalFeed,
-    HomePopularTagList
+    PopularTagList
   }
 })
 export default class Home extends Vue {}
