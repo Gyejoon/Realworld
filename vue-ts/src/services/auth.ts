@@ -24,9 +24,11 @@ export type RegisterRequest = {
 };
 
 export type UpdateRequest = {
-  email: string;
-  bio: string;
-  image: string;
+  email?: string;
+  username?: string;
+  bio?: string;
+  image?: string;
+  password?: string;
 };
 
 export default {
@@ -39,21 +41,17 @@ export default {
     });
   },
   register: async (request: RegisterRequest) => {
-    const response = await apiClient.post<AuthResponse>('/users', {
+    return apiClient.post<AuthResponse>('/users', {
       user: {
         ...request
       }
     });
-
-    return response.data;
   },
   update: async (request: UpdateRequest) => {
-    const response = await apiClient.put<AuthResponse>('/api/user', {
+    return apiClient.put<AuthResponse>('/user', {
       user: {
         ...request
       }
     });
-
-    return response.data;
   }
 };

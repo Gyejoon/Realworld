@@ -1,6 +1,6 @@
 import jwt from '@/lib/jwt';
 import { authService } from '@/services';
-import { User, LoginRequest } from '@/services/auth';
+import { User, LoginRequest, UpdateRequest } from '@/services/auth';
 import { setHeader } from '@/services/apiClient';
 
 export type AuthState = {
@@ -47,13 +47,21 @@ const actions = {
     if (token) {
       setHeader(token);
       try {
-        const response = await authService.current();
-        commit('setAuth', response.data.user);
+        const { data } = await authService.current();
+        commit('setAuth', data.user);
       } catch (e) {
         commit('setError', e.data.errors);
       }
     } else {
       commit('purgeAuth');
+    }
+  },
+  async updateUser({ commit }: any, body: UpdateRequest) {
+    try {
+      const { data } = await authService.update(body);
+      commit('setAuth', data.user);
+    } catch (e) {
+      commit('setError', e.data.errors);
     }
   }
 };
