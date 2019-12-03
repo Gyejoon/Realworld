@@ -3,9 +3,9 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign in</h1>
+          <h1 class="text-xs-center">로그인</h1>
           <p class="text-xs-center">
-            <router-link to="/register">Need an account?</router-link>
+            <router-link to="/register">계정이 필요 합니까?</router-link>
           </p>
 
           <ul v-if="errors" class="error-messages">
@@ -17,7 +17,7 @@
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="Email"
+                placeholder="이메일"
                 v-model="form.email"
               />
             </fieldset>
@@ -25,12 +25,12 @@
               <input
                 class="form-control form-control-lg"
                 type="password"
-                placeholder="Password"
+                placeholder="패스워드"
                 v-model="form.password"
               />
             </fieldset>
             <button class="btn btn-lg btn-primary pull-xs-right">
-              Sign in
+              로그인
             </button>
           </form>
         </div>
