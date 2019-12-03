@@ -29,7 +29,7 @@ const actions = {
       const { data } = await articleService.getArticles(params);
       commit('fetchEnd', data.articles, data.articlesCount);
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   },
   async fetchTags({ commit }: any) {
@@ -37,7 +37,7 @@ const actions = {
       const { data } = await tagService.getTags();
       commit('setTags', data.tags);
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   }
 };
