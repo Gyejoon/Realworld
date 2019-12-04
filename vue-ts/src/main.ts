@@ -13,7 +13,7 @@ Vue.filter('date', (value: Date) => {
   dayjs.locale('ko');
   dayjs.extend(calendar);
 
-  return dayjs().calendar(dayjs(value));
+  return dayjs(value).calendar();
 });
 
 router.beforeEach((to, from, next: any) =>
