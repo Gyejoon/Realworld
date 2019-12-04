@@ -32,10 +32,6 @@ export default class ArticleMeta extends Vue {
   @Prop() article!: Article;
   @Prop() actions!: boolean;
 
-  created() {
-    console.log(this.article.author);
-  }
-
   isCurrentUser() {
     if (this.currentUser.username && this.article.author.username) {
       return this.currentUser.username === this.article.author.username;
