@@ -32,20 +32,16 @@ export type ArticleQueryParam = {
 };
 
 export type CreateArticleRequest = {
-  article: {
-    title: string;
-    description: string;
-    body: string;
-    tagList?: string[];
-  };
+  title: string;
+  description: string;
+  body: string;
+  tagList?: string[];
 };
 
 export type UpdateArticleRequest = {
-  article: {
-    title?: string;
-    description?: string;
-    body?: string;
-  };
+  title?: string;
+  description?: string;
+  body?: string;
 };
 
 export default {
@@ -53,9 +49,18 @@ export default {
     apiClient.get<ArticlesResponse>('/articles', { params }),
   getArticleFeed: (params: ArticleQueryParam = {}) =>
     apiClient.get<ArticlesResponse>('/articles/feed', { params }),
-  getArticle: (slug: string) => apiClient.get<ArticlesResponse>(`/articles/${slug}`),
-  createArticle: (body: CreateArticleRequest) => apiClient.post<ArticleResponse>('/articles', body),
+  getArticle: (slug: string) => apiClient.get<ArticleResponse>(`/articles/${slug}`),
+  createArticle: (body: CreateArticleRequest) =>
+    apiClient.post<ArticleResponse>('/articles', {
+      article: {
+        ...body
+      }
+    }),
   updateArticle: (slug: string, body: UpdateArticleRequest) =>
-    apiClient.put<ArticleResponse>(`/articles/${slug}`, body),
+    apiClient.put<ArticleResponse>(`/articles/${slug}`, {
+      article: {
+        ...body
+      }
+    }),
   deleteArticle: (slug: string) => apiClient.delete(`/articles/${slug}`)
 };

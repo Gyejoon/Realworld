@@ -11,6 +11,7 @@
       </router-link>
       <span class="date">{{ article.createdAt | date }}</span>
     </div>
+    <ArticleActions v-if="actions" :article="article" :canModify="isCurrentUser()" />
     <button class="btn btn-outline-primary btn-sm pull-xs-right">
       <i class="ion-heart"></i> {{ article.favoritesCount }}
     </button>
@@ -19,10 +20,32 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import ArticleActions from '@/components/article/ArticleActions.vue';
 import { Article } from '@/services/articles';
 
-@Component
+@Component({
+  components: {
+    ArticleActions
+  }
+})
 export default class ArticleMeta extends Vue {
   @Prop() article!: Article;
+  @Prop() actions!: boolean;
+
+  created() {
+    console.log(this.article.author);
+  }
+
+  isCurrentUser() {
+    if (this.currentUser.username && this.article.author.username) {
+      return this.currentUser.username === this.article.author.username;
+    }
+
+    return false;
+  }
+
+  get currentUser() {
+    return this.$store.getters['auth/currentUser'];
+  }
 }
 </script>

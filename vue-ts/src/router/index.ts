@@ -22,7 +22,13 @@ const routes = [
   {
     path: '/editor',
     name: 'article-editor',
-    component: () => import('@/views/Editor.vue')
+    component: () => import('@/views/ArticleEditor.vue')
+  },
+  {
+    path: '/article/:slug',
+    name: 'article',
+    component: () => import('@/views/ArticleView.vue'),
+    props: true
   },
   {
     path: '/settings',
@@ -33,6 +39,12 @@ const routes = [
     path: '/@:username',
     name: 'profile',
     component: () => import('@/views/Profile.vue')
+  },
+  {
+    path: '*',
+    redirect: {
+      name: 'home'
+    }
   }
 ];
 

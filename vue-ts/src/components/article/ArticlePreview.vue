@@ -2,7 +2,8 @@
   <div class="article-preview">
     <ArticleMeta :article="article" />
     <router-link
-      :to="{ name: 'article-preview', params: { slug: article.slug } }"
+      exact
+      :to="{ name: 'article', params: { slug: article.slug } }"
       class="preview-link"
     >
       <h1>{{ article.title }}</h1>
