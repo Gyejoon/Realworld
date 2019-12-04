@@ -1,6 +1,6 @@
 import jwt from '@/lib/jwt';
 import { authService } from '@/services';
-import { User, LoginRequest, UpdateRequest } from '@/services/auth';
+import { User, LoginRequest, UpdateRequest, RegisterRequest } from '@/services/auth';
 import { setHeader } from '@/services/apiClient';
 
 export type AuthState = {
@@ -49,8 +49,8 @@ const actions = {
       try {
         const { data } = await authService.current();
         commit('setAuth', data.user);
-      } catch (e) {
-        commit('setError', e.data.errors);
+      } catch ({ response }) {
+        commit('setError', response.data.errors);
       }
     } else {
       commit('purgeAuth');
@@ -60,9 +60,20 @@ const actions = {
     try {
       const { data } = await authService.update(body);
       commit('setAuth', data.user);
-    } catch (e) {
-      commit('setError', e.data.errors);
+    } catch ({ response }) {
+      commit('setError', response.data.errors);
     }
+  },
+  registerUser({ commit }: any, body: RegisterRequest) {
+    return new Promise(async resolve => {
+      try {
+        const { data } = await authService.register(body);
+        commit('setAuth', data.user);
+        resolve(data.user);
+      } catch ({ response }) {
+        commit('setError', response.data.errors);
+      }
+    });
   }
 };
 
