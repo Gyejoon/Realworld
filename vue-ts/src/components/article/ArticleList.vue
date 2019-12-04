@@ -7,7 +7,12 @@
       </div>
       <ArticlePreview v-for="article in articles" :key="article.slug" :article="article" />
       <div class="text-xs-center">
-        <v-pagination color="#1e88e5" :length="pageCount" v-model="currentPage" :total-visible="10" />
+        <v-pagination
+          color="#1e88e5"
+          :length="pageCount"
+          v-model="currentPage"
+          :total-visible="10"
+        />
       </div>
     </div>
   </div>
