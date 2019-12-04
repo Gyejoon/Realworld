@@ -1,4 +1,4 @@
-import { Article, ArticleQueryParam, ArticleResponse } from '@/services/articles';
+import { Article, ArticleQueryParam, ArticleResponse, ArticlesResponse } from '@/services/articles';
 import { articleService, tagService } from '@/services';
 
 export type HomeState = {
@@ -19,7 +19,7 @@ const getters = {
   getArticles: (state: HomeState) => state.articles,
   getTags: (state: HomeState) => state.tags,
   isLoading: (state: HomeState) => state.isLoading,
-  getArticlesCount: (state: HomeState) => state.articlesCount
+  articlesCount: (state: HomeState) => state.articlesCount
 };
 
 const actions = {
@@ -27,7 +27,7 @@ const actions = {
     commit('fetchStart');
     try {
       const { data } = await articleService.getArticles(params);
-      commit('fetchEnd', data.articles, data.articlesCount);
+      commit('fetchEnd', data);
     } catch (e) {
       throw new Error(e);
     }
@@ -46,9 +46,9 @@ const mutations: any = {
   fetchStart(state: HomeState) {
     state.isLoading = true;
   },
-  fetchEnd(state: HomeState, articles: Article[], articlesCount: number) {
-    state.articles = articles;
-    state.articlesCount = articlesCount;
+  fetchEnd(state: HomeState, data: ArticlesResponse) {
+    state.articles = data.articles;
+    state.articlesCount = data.articlesCount;
     state.isLoading = false;
   },
   setTags(state: HomeState, tags: string[]) {
