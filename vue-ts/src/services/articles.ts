@@ -31,17 +31,11 @@ export type ArticleQueryParam = {
   offset?: number;
 };
 
-export type CreateArticleRequest = {
+export type ArticleForm = {
   title: string;
   description: string;
   body: string;
   tagList?: string[];
-};
-
-export type UpdateArticleRequest = {
-  title?: string;
-  description?: string;
-  body?: string;
 };
 
 export default {
@@ -50,13 +44,13 @@ export default {
   getArticleFeed: (params: ArticleQueryParam = {}) =>
     apiClient.get<ArticlesResponse>('/articles/feed', { params }),
   getArticle: (slug: string) => apiClient.get<ArticleResponse>(`/articles/${slug}`),
-  createArticle: (body: CreateArticleRequest) =>
+  createArticle: (body: ArticleForm) =>
     apiClient.post<ArticleResponse>('/articles', {
       article: {
         ...body
       }
     }),
-  updateArticle: (slug: string, body: UpdateArticleRequest) =>
+  updateArticle: (slug: string, body: ArticleForm) =>
     apiClient.put<ArticleResponse>(`/articles/${slug}`, {
       article: {
         ...body

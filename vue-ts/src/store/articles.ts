@@ -1,5 +1,6 @@
+import { Article } from '@/services/articles';
 import { Profile } from '@/services/profile';
-import { CreateArticleRequest } from '@/services/articles';
+import { articleService, commentService } from '@/services';
 
 export type ArticlesState = {
   article: {
@@ -35,10 +36,24 @@ const getters = {
   comments: (state: ArticlesState) => state.comments
 };
 
-const actions = {};
+const actions = {
+  fetchArticle: async ({ commit }: any, slug: string) => {
+    const { data } = await articleService.getArticle(slug);
+    commit('setArticle', data.article);
+  },
+  resetState: ({ commit }: any) => {
+    commit('resetState');
+  }
+};
 
 const mutations = {
-  setArticle: (state: ArticlesState, article: CreateArticleRequest) => {},
+  setArticle: (state: ArticlesState, article: Article) => {
+    state.article = article;
+  },
+  resetState: (state: ArticlesState) => {
+    state.article = initialState.article;
+    state.comments = initialState.comments;
+  },
   tagAdd: (state: ArticlesState, tag: string) => {},
   tagRemove: (state: ArticlesState, tag: string) => {}
 };

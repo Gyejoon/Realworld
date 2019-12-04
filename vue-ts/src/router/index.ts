@@ -20,9 +20,10 @@ const routes = [
     component: () => import('@/views/Register.vue')
   },
   {
-    path: '/editor',
+    path: '/editor/:slug?',
     name: 'article-editor',
-    component: () => import('@/views/ArticleEditor.vue')
+    component: () => import('@/views/ArticleEditor.vue'),
+    props: true
   },
   {
     path: '/article/:slug',
@@ -38,7 +39,8 @@ const routes = [
   {
     path: '/@:username',
     name: 'profile',
-    component: () => import('@/views/Profile.vue')
+    component: () => import('@/views/Profile.vue'),
+    props: true
   },
   {
     path: '*',

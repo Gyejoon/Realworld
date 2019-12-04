@@ -33,15 +33,15 @@
                 <input
                   type="text"
                   v-model="tagInput"
-                  @keypress.enter.prevent="addTag(tagInput)"
+                  @keypress.enter.prevent="addTag()"
                   class="form-control"
                   placeholder="태그"
                 />
                 <div class="tag-list">
                   <span
                     class="tag-default tag-pill"
-                    v-for="(tag, index) in form.tagList"
-                    :key="index"
+                    v-for="(tag, index) of form.tagList"
+                    :key="tag + index"
                   >
                     <i class="ion-close-round" @click="removeTag(tag)"> </i>
                     {{ tag }}
@@ -64,13 +64,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Article, CreateArticleRequest } from '../services/articles';
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Article, ArticleForm } from '../services/articles';
 import { articleService } from '../services';
 
 @Component
 export default class ArticleEdtior extends Vue {
-  form: CreateArticleRequest = {
+  @Prop() slug!: string;
+  form: ArticleForm = {
     title: '',
     description: '',
     body: '',
@@ -79,10 +80,26 @@ export default class ArticleEdtior extends Vue {
   tagInput: string = '';
   isLoading: boolean = false;
 
+  async created() {
+    if (this.slug !== undefined) {
+      try {
+        const { data } = await articleService.getArticle(this.slug);
+        this.form = data.article;
+      } catch (e) {
+        alert(e);
+      }
+    }
+  }
+
   async submit() {
     this.isLoading = true;
     try {
-      await articleService.createArticle(this.form);
+      if (this.slug !== undefined) {
+        await articleService.updateArticle(this.slug, this.form);
+      } else {
+        await articleService.createArticle(this.form);
+      }
+
       this.isLoading = false;
       this.$router.push({ name: 'home' });
     } catch (e) {
@@ -91,13 +108,15 @@ export default class ArticleEdtior extends Vue {
     }
   }
 
-  addTag(tag: string) {
-    this.form.tagList!.push(tag);
-    this.tagInput = '';
+  addTag() {
+    if (this.tagInput !== '') {
+      this.form.tagList!.push(this.tagInput);
+      this.tagInput = '';
+    }
   }
 
   removeTag(tag: string) {
-    this.form.tagList!.filter(t => t === tag);
+    this.form.tagList = this.form.tagList!.filter(t => t !== tag);
   }
 }
 </script>

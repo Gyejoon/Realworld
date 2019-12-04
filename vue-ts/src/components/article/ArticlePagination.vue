@@ -9,7 +9,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Pagination extends Vue {
-  @Prop({required: true}) pages!: [];
-  @Prop({required: true}) currentPage!: number;
+  @Prop({ required: true }) pages!: [];
+  @Prop({ required: true }) currentPage!: number;
 }
 </script>

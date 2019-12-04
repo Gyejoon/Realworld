@@ -11,10 +11,10 @@
     <div class="container page">
       <div class="row article-content">
         <div class="col-md-12">
-          <div v-html="article.body"></div>
+          <div v-html="parseMarkdown(article.body)"></div>
           <ul class="tag-list">
             <li v-for="(tag, index) of article.tagList" :key="tag + index">
-              <VTag :tag="tag" />
+              <span class="tag-item tag-pill tag-default">{{ tag }}</span>
             </li>
           </ul>
         </div>
@@ -27,6 +27,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ArticleMeta from '@/components/article/ArticleMeta.vue';
 import VTag from '@/components/VTag.vue';
+import marked from 'marked';
 import { articleService } from '../services';
 import { Article } from '@/services/articles';
 
@@ -38,11 +39,31 @@ import { Article } from '@/services/articles';
 })
 export default class ArticleView extends Vue {
   @Prop() slug!: string;
-  article: any = {};
 
-  async mounted() {
-    const { data } = await articleService.getArticle(this.slug);
-    this.article = data.article;
+  created() {
+    this.$store.dispatch('articles/fetchArticle', this.slug);
+  }
+
+  get article(): Article {
+    return this.$store.getters['articles/article'];
+  }
+
+  beforeDestroy() {
+    this.$store.dispatch('articles/resetState');
+  }
+
+  parseMarkdown(body: string) {
+    return marked(body);
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.tag-list {
+  margin-top: 16px;
+
+  .tag-item {
+    text-decoration: none;
+  }
+}
+</style>

@@ -7,7 +7,7 @@
       <router-link
         :to="{ name: 'profile', params: { username: article.author.username } }"
         class="author"
-        >{{ article.author.name }}
+        >{{ article.author.username }}
       </router-link>
       <span class="date">{{ article.createdAt | date }}</span>
     </div>
@@ -29,7 +29,7 @@ import { Article } from '@/services/articles';
   }
 })
 export default class ArticleMeta extends Vue {
-  @Prop() article!: Article;
+  @Prop({ required: true }) article!: Article;
   @Prop() actions!: boolean;
 
   isCurrentUser() {
