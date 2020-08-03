@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { AppProps } from 'next/app';
+import LayoutTemplate from 'components/layout/LayoutTemplate';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -7,7 +8,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="viewport-fit=cover" />
       </Head>
-      <Component {...pageProps} />
+      <LayoutTemplate>
+        <Component {...pageProps} />
+      </LayoutTemplate>
     </>
   );
 }
