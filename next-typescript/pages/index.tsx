@@ -1,10 +1,19 @@
-import styled from 'styled-components'
+import TagList from 'components/home/TagList';
+import Banner from 'components/home/Banner';
+import MainView from 'components/home/MainView';
 
-const Title = styled.h1`
-  color: red;
-  font-size: 50px;
-`
+const Home = () => {
+  return (
+    <div className="home-page">
+      <Banner />
+      <div className="container page">
+        <div className="row">
+          <MainView />
+          <TagList />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default function Home() {
-  return <Title>My page</Title>
-}
+export default Home;

@@ -1,6 +1,7 @@
 import Header from './Header';
 import Footer from './Footer';
-type Props = {};
+
+interface Props {}
 
 const LayoutTemplate: React.FC<Props> = ({ children }) => {
   return (
