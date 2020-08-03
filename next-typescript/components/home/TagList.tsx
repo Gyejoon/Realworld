@@ -1,34 +1,24 @@
+import useRequest from 'lib/hooks/useRequest';
+import { GetTagsResponse } from 'lib/api/tags';
+
 const TagList = () => {
+  const { data } = useRequest<GetTagsResponse>({
+    url: '/tags',
+  });
+
   return (
     <div className="col-md-3">
       <div className="sidebar">
         <p>Popular Tags</p>
 
         <div className="tag-list">
-          <a href="" className="tag-pill tag-default">
-            programming
-          </a>
-          <a href="" className="tag-pill tag-default">
-            javascript
-          </a>
-          <a href="" className="tag-pill tag-default">
-            emberjs
-          </a>
-          <a href="" className="tag-pill tag-default">
-            angularjs
-          </a>
-          <a href="" className="tag-pill tag-default">
-            react
-          </a>
-          <a href="" className="tag-pill tag-default">
-            mean
-          </a>
-          <a href="" className="tag-pill tag-default">
-            node
-          </a>
-          <a href="" className="tag-pill tag-default">
-            rails
-          </a>
+          {data
+            ? data.tags.map((tag) => (
+                <a key={tag} href="" className="tag-pill tag-default">
+                  {tag}
+                </a>
+              ))
+            : 'Loading...'}
         </div>
       </div>
     </div>
